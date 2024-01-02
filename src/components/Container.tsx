@@ -1,4 +1,4 @@
-import { FeedbackList, Header } from "./index";
+import { FeedbackList, Header } from "@/components";
 
 export default function Container() {
   return (

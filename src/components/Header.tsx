@@ -1,4 +1,4 @@
-import { FeedbackForm, Logo, PageHeading, Pattern } from "./index";
+import { FeedbackForm, Logo, PageHeading, Pattern } from "@/components";
 
 export default function Header() {
   return (

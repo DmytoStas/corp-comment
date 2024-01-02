@@ -1,9 +1,31 @@
+import { useState } from "react";
+
+import { MAX_CHAR } from "@/lib/contants";
+
+type ChangeEvent = React.ChangeEvent<HTMLTextAreaElement>;
+
 export default function FeedbackForm() {
+  const [text, setText] = useState("");
+
+  const charCount = MAX_CHAR - text.length;
+
+  const handleChange = (e: ChangeEvent) => {
+    const newText = e.target.value;
+
+    if (newText.length > MAX_CHAR) {
+      return;
+    }
+
+    setText(newText);
+  };
+
   return (
     <form className="form">
       <textarea
         id="feedback-textarea"
-        placeholder=""
+        value={text}
+        onChange={handleChange}
+        placeholder=" "
         spellCheck={false}
         maxLength={150}
       />
@@ -12,7 +34,7 @@ export default function FeedbackForm() {
       </label>
 
       <div>
-        <p className="u-italic">150</p>
+        <p className="u-italic">{charCount}</p>
         <button>
           <span>Submit</span>
         </button>
