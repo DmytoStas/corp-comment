@@ -7,3 +7,5 @@ export { default as Pattern } from "./Pattern";
 export { default as Logo } from "./Logo";
 export { default as PageHeading } from "./PageHeading";
 export { default as FeedbackForm } from "./feedback/FeedbackForm";
+export { default as Spinner } from "./Spinner";
+export { default as ErrorMessage } from "./ErrorMessage";

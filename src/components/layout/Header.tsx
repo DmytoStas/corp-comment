@@ -1,10 +1,9 @@
 import { FeedbackForm, Logo, PageHeading, Pattern } from "@/components";
+import { useFeedbackItemsContex } from "@/lib/hooks";
 
-type HeaderProps = {
-  handleAddToList: (text: string) => void;
-};
+export default function Header() {
+  const { handleAddToList } = useFeedbackItemsContex();
 
-export default function Header({ handleAddToList }: HeaderProps) {
   return (
     <header>
       <Pattern />
