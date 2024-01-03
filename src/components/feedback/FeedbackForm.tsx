@@ -2,10 +2,16 @@ import { useState } from "react";
 
 import { MAX_CHAR } from "@/lib/contants";
 
+type FeedbackFormProps = {
+  onAddToList: (text: string) => void;
+};
+
 type ChangeEvent = React.ChangeEvent<HTMLTextAreaElement>;
 
-export default function FeedbackForm() {
+export default function FeedbackForm({ onAddToList }: FeedbackFormProps) {
   const [text, setText] = useState("");
+  const [isValidIndicator, setIsValidIndicator] = useState(false);
+  const [isInvalidIndicator, setIsInvalidIndicator] = useState(false);
 
   const charCount = MAX_CHAR - text.length;
 
@@ -19,8 +25,29 @@ export default function FeedbackForm() {
     setText(newText);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (text.includes("#") && text.length >= 5) {
+      setIsValidIndicator(true);
+      setTimeout(() => setIsValidIndicator(false), 2000);
+    } else {
+      setIsInvalidIndicator(true);
+      setTimeout(() => setIsInvalidIndicator(false), 2000);
+      return;
+    }
+    onAddToList(text);
+
+    setText("");
+  };
+
   return (
-    <form className="form">
+    <form
+      onSubmit={handleSubmit}
+      className={`form ${isValidIndicator ? "form--valid" : ""} ${
+        isInvalidIndicator ? "form--invalid" : ""
+      }`}
+    >
       <textarea
         id="feedback-textarea"
         value={text}
